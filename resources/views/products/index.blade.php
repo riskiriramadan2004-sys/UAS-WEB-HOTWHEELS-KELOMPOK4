@@ -11,8 +11,7 @@
 <div class="col-md-4 mb-4">
 
     <div class="card card-custom h-100">
-
-        <img src="{{ asset('storage/'.$product->image) }}"
+        <img src="{{ asset('uploads/'.$product->image) }}"
              height="250"
              style="object-fit:cover">
 
