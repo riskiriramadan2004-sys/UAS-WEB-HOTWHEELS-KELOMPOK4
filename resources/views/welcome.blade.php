@@ -9,9 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -25,8 +23,8 @@
             position: relative;
             overflow: hidden;
             background:
-                radial-gradient(circle at 82% 45%, rgba(255, 106, 0, .35), transparent 28%),
-                radial-gradient(circle at 15% 80%, rgba(255, 160, 50, .16), transparent 26%),
+                radial-gradient(circle at 82% 45%, rgba(255,106,0,.35), transparent 28%),
+                radial-gradient(circle at 15% 80%, rgba(255,160,50,.16), transparent 26%),
                 linear-gradient(110deg, #050505 0%, #0d0d12 42%, #241006 100%);
         }
 
@@ -35,14 +33,8 @@
             position: absolute;
             inset: 0;
             background:
-                linear-gradient(to right, rgba(0,0,0,.92) 0%, rgba(0,0,0,.72) 45%, rgba(0,0,0,.2) 100%),
-                repeating-linear-gradient(
-                    90deg,
-                    rgba(255,255,255,.025) 0px,
-                    rgba(255,255,255,.025) 1px,
-                    transparent 1px,
-                    transparent 80px
-                );
+                linear-gradient(to right, rgba(0,0,0,.92), rgba(0,0,0,.72) 45%, rgba(0,0,0,.2)),
+                repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 1px, transparent 1px, transparent 80px);
             z-index: 1;
             pointer-events: none;
         }
@@ -63,7 +55,7 @@
             letter-spacing: 4px;
             text-decoration: none;
             color: #ff6b1a;
-            text-shadow: 0 0 25px rgba(255, 107, 26, .35);
+            text-shadow: 0 0 25px rgba(255,107,26,.35);
         }
 
         .hero-left {
@@ -91,9 +83,8 @@
             font-size: 76px;
             line-height: .98;
             font-weight: 800;
-            color: #ffffff;
+            color: #fff;
             margin: 0;
-            letter-spacing: 1px;
             text-transform: uppercase;
         }
 
@@ -113,9 +104,7 @@
             line-height: 1.6;
         }
 
-        .actions {
-            margin-top: 42px;
-        }
+        .actions { margin-top: 42px; }
 
         .btn-shop {
             padding: 18px 44px;
@@ -123,20 +112,14 @@
             border: none;
             color: #fff;
             font-weight: 800;
-            text-decoration: none;
-            background: linear-gradient(135deg, #ff5a00 0%, #ffa12b 100%);
-            box-shadow:
-                0 14px 38px rgba(255, 90, 0, .35),
-                inset 0 1px 0 rgba(255,255,255,.3);
+            background: linear-gradient(135deg, #ff5a00, #ffa12b);
+            box-shadow: 0 14px 38px rgba(255,90,0,.35), inset 0 1px 0 rgba(255,255,255,.3);
             transition: .25s ease;
         }
 
         .btn-shop:hover {
-            color: #fff;
             transform: translateY(-4px);
-            box-shadow:
-                0 22px 50px rgba(255, 90, 0, .48),
-                inset 0 1px 0 rgba(255,255,255,.3);
+            box-shadow: 0 22px 50px rgba(255,90,0,.48), inset 0 1px 0 rgba(255,255,255,.3);
         }
 
         .hero-right {
@@ -164,11 +147,11 @@
             content: "";
             position: absolute;
             inset: 35px 45px;
-            border: 1px solid rgba(255, 111, 0, .18);
+            border: 1px solid rgba(255,111,0,.18);
             border-radius: 36px;
             z-index: 3;
             pointer-events: none;
-            box-shadow: 0 0 80px rgba(255, 90, 0, .18);
+            box-shadow: 0 0 80px rgba(255,90,0,.18);
         }
 
         .hero-image {
@@ -182,13 +165,8 @@
         }
 
         @keyframes slowZoom {
-            from {
-                transform: scale(1) translateX(0);
-            }
-
-            to {
-                transform: scale(1.08) translateX(-18px);
-            }
+            from { transform: scale(1) translateX(0); }
+            to { transform: scale(1.08) translateX(-18px); }
         }
 
         .speed-line {
@@ -197,51 +175,30 @@
             width: 260px;
             left: 8%;
             bottom: 12%;
-            background: linear-gradient(to right, transparent, rgba(255, 98, 0, .75), transparent);
+            background: linear-gradient(to right, transparent, rgba(255,98,0,.75), transparent);
             z-index: 2;
             animation: speedMove 2.8s linear infinite;
         }
 
-        .speed-line:nth-child(2) {
-            bottom: 16%;
-            width: 180px;
-            animation-delay: .8s;
-        }
-
-        .speed-line:nth-child(3) {
-            bottom: 20%;
-            width: 320px;
-            animation-delay: 1.4s;
-        }
+        .speed-line:nth-child(2) { bottom: 16%; width: 180px; animation-delay: .8s; }
+        .speed-line:nth-child(3) { bottom: 20%; width: 320px; animation-delay: 1.4s; }
 
         @keyframes speedMove {
-            0% {
-                transform: translateX(-80px);
-                opacity: 0;
-            }
-
-            30% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateX(260px);
-                opacity: 0;
-            }
+            0% { transform: translateX(-80px); opacity: 0; }
+            30% { opacity: 1; }
+            100% { transform: translateX(260px); opacity: 0; }
         }
 
         .modal-content {
-            background: rgba(18, 14, 18, .97);
-            border: 1px solid rgba(255, 112, 0, .25);
+            background: rgba(18,14,18,.97);
+            border: 1px solid rgba(255,112,0,.25);
             border-radius: 28px;
             color: white;
             backdrop-filter: blur(14px);
             box-shadow: 0 25px 70px rgba(0,0,0,.65);
         }
 
-        .modal-header {
-            border-bottom: 1px solid rgba(255,255,255,.1);
-        }
+        .modal-header { border-bottom: 1px solid rgba(255,255,255,.1); }
 
         .modal-title {
             font-family: 'Orbitron', sans-serif;
@@ -265,9 +222,7 @@
             color: white;
         }
 
-        .form-control::placeholder {
-            color: rgba(255,255,255,.45);
-        }
+        .form-control::placeholder { color: rgba(255,255,255,.45); }
 
         label {
             font-size: 13px;
@@ -309,34 +264,17 @@
         }
 
         @media(max-width: 992px) {
-            .navbar-custom {
-                width: 100%;
-                padding: 24px 20px;
-            }
-
-            .logo {
-                font-size: 28px;
-            }
-
+            .navbar-custom { width: 100%; padding: 24px 20px; }
+            .logo { font-size: 28px; }
             .hero-left {
                 width: 100%;
                 min-height: 100vh;
                 padding: 130px 30px 60px;
                 background: rgba(0,0,0,.52);
             }
-
-            .hero-title {
-                font-size: 52px;
-            }
-
-            .hero-description {
-                font-size: 18px;
-            }
-
-            .hero-right {
-                width: 100vw;
-                opacity: .45;
-            }
+            .hero-title { font-size: 52px; }
+            .hero-description { font-size: 18px; }
+            .hero-right { width: 100vw; opacity: .45; }
         }
     </style>
 </head>
@@ -344,7 +282,6 @@
 <body>
 
 <section class="hero">
-
     <div class="speed-line"></div>
     <div class="speed-line"></div>
     <div class="speed-line"></div>
@@ -378,13 +315,8 @@
     </div>
 
     <div class="hero-right">
-        <img
-            src="{{ asset('uploads/Pages Awal.jpg') }}"
-            class="hero-image"
-            alt="Hot Wheels Collection"
-        >
+        <img src="{{ asset('uploads/Pages Awal.jpg') }}" class="hero-image" alt="Hot Wheels Collection">
     </div>
-
 </section>
 
 <div class="modal fade" id="authChoiceModal" tabindex="-1">
@@ -406,7 +338,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#loginModal">
                         <h5 class="mb-1">Login</h5>
-                        <small class="text-white-50">Masuk dengan akun yang sudah terdaftar.</small>
+                        <small class="text-white-50">Admin pakai username, user pakai email.</small>
                     </button>
 
                     <button class="auth-choice text-start"
@@ -414,7 +346,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#registerModal">
                         <h5 class="mb-1">Register</h5>
-                        <small class="text-white-50">Buat akun baru.</small>
+                        <small class="text-white-50">Buat akun user baru dengan email.</small>
                     </button>
                 </div>
             </div>
@@ -431,17 +363,47 @@
             </div>
 
             <div class="modal-body">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        Data yang dimasukkan tidak valid.
+                    </div>
+                @endif
+
                 <form method="POST" action="{{ route('login.process') }}">
                     @csrf
 
                     <div class="mb-3">
-                        <label>username</label>
-                        <input type="text" name="username" class="form-control" placeholder="Enter your username" required>
+                        <label>username / email</label>
+                        <input
+                            type="text"
+                            name="username"
+                            class="form-control"
+                            placeholder="admin atau example@gmail.com"
+                            required
+                        >
                     </div>
 
                     <div class="mb-3">
                         <label>password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Enter your password" required>
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Enter your password"
+                            required
+                        >
                     </div>
 
                     <button class="btn-auth">
@@ -463,7 +425,7 @@
 
                 <div class="text-center mt-3">
                     <small style="color:rgba(255,255,255,.35);">
-                        demo: admin/admin123 | user1/user123
+                        admin: admin / admin123
                     </small>
                 </div>
             </div>
@@ -484,18 +446,36 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label>username</label>
-                        <input type="text" name="username" class="form-control" placeholder="Create username" required>
+                        <label>email</label>
+                        <input
+                            type="email"
+                            name="username"
+                            class="form-control"
+                            placeholder="example@gmail.com"
+                            required
+                        >
                     </div>
 
                     <div class="mb-3">
                         <label>password</label>
-                        <input type="password" name="password" class="form-control" placeholder="Create password" required>
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Create password"
+                            required
+                        >
                     </div>
 
                     <div class="mb-3">
                         <label>confirm password</label>
-                        <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password" required>
+                        <input
+                            type="password"
+                            name="password_confirmation"
+                            class="form-control"
+                            placeholder="Confirm password"
+                            required
+                        >
                     </div>
 
                     <button class="btn-auth">
@@ -520,6 +500,15 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+@if(session('open_login_modal'))
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        loginModal.show();
+    });
+</script>
+@endif
 
 </body>
 </html>

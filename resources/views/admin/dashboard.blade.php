@@ -2,173 +2,251 @@
 
 @section('content')
 
-<div class="welcome-text">
-    Welcome back, Admin!
-</div>
+<div class="admin-dashboard">
 
-<div class="welcome-subtext">
-    Here's what's happening with your store today.
-</div>
-
-<div class="row g-4 mb-4">
-
-    <div class="col-md-4">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-start">
-
-                <div>
-                    <div class="stat-value">{{ $total_products }}</div>
-                    <div class="stat-label">Total Products</div>
-                </div>
-
-                <div class="stat-icon">
-                    <i class="fas fa-car"></i>
-                </div>
-
-            </div>
+    <div class="mb-4">
+        <div class="welcome-text">Welcome back, Admin!</div>
+        <div class="welcome-subtext">
+            Here's what's happening with your Hot Wheels store today.
         </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-start">
+    <div class="row g-4 mb-4">
 
+        <div class="col-xl-4 col-md-6">
+            <div class="dash-card">
                 <div>
-                    <div class="stat-value">{{ $total_orders }}</div>
-                    <div class="stat-label">Total Orders</div>
+                    <h2>{{ $total_products }}</h2>
+                    <p>Total Products</p>
                 </div>
-
-                <div class="stat-icon">
-                    <i class="fas fa-shopping-cart"></i>
+                <div class="dash-icon">
+                    <i class="fas fa-car-side"></i>
                 </div>
-
             </div>
         </div>
-    </div>
 
-    <div class="col-md-4">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-start">
-
+        <div class="col-xl-4 col-md-6">
+            <div class="dash-card">
                 <div>
-                    <div class="stat-value">{{ $total_users }}</div>
-                    <div class="stat-label">Total Users</div>
+                    <h2>{{ $total_orders }}</h2>
+                    <p>Total Orders</p>
                 </div>
+                <div class="dash-icon">
+                    <i class="fas fa-cart-shopping"></i>
+                </div>
+            </div>
+        </div>
 
-                <div class="stat-icon">
+        <div class="col-xl-4 col-md-6">
+            <div class="dash-card">
+                <div>
+                    <h2>{{ $total_users }}</h2>
+                    <p>Total Users</p>
+                </div>
+                <div class="dash-icon">
                     <i class="fas fa-users"></i>
                 </div>
-
             </div>
         </div>
-    </div>
 
-</div>
-
-<div class="row g-4 mb-4">
-
-    <div class="col-md-6">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-start">
-
+        <div class="col-xl-6 col-md-6">
+            <div class="dash-card revenue-card">
                 <div>
-                    <div class="stat-value">
-                        Rp {{ number_format($revenue, 0, ',', '.') }}
-                    </div>
-
-                    <div class="stat-label">
-                        Revenue
-                    </div>
+                    <h2>Rp {{ number_format($revenue, 0, ',', '.') }}</h2>
+                    <p>Revenue</p>
                 </div>
-
-                <div class="stat-icon">
-                    <i class="fas fa-dollar-sign"></i>
+                <div class="dash-icon">
+                    <i class="fas fa-money-bill-wave"></i>
                 </div>
-
             </div>
         </div>
-    </div>
 
-    <div class="col-md-3">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-start">
-
+        <div class="col-xl-3 col-md-6">
+            <div class="dash-card">
                 <div>
-                    <div class="stat-value">{{ $pending_orders }}</div>
-                    <div class="stat-label">Pending Orders</div>
+                    <h2>{{ $pending_orders }}</h2>
+                    <p>Pending Orders</p>
                 </div>
-
-                <div class="stat-icon">
+                <div class="dash-icon">
                     <i class="fas fa-clock"></i>
                 </div>
-
             </div>
         </div>
-    </div>
 
-    <div class="col-md-3">
-        <div class="stat-card">
-            <div class="d-flex justify-content-between align-items-start">
-
+        <div class="col-xl-3 col-md-6">
+            <div class="dash-card">
                 <div>
-                    <div class="stat-value">{{ $low_stock }}</div>
-                    <div class="stat-label">Low Stock</div>
+                    <h2>{{ $low_stock }}</h2>
+                    <p>Low Stock</p>
                 </div>
-
-                <div class="stat-icon">
-                    <i class="fas fa-exclamation-triangle"></i>
+                <div class="dash-icon">
+                    <i class="fas fa-triangle-exclamation"></i>
                 </div>
-
             </div>
+        </div>
+
+    </div>
+
+    <div class="orders-panel">
+        <div class="panel-header">
+            <div>
+                <h3>Recent Orders</h3>
+                <p>Latest customer purchases</p>
+            </div>
+
+            <a href="{{ route('admin.orders.index') }}" class="btn-hot">
+                View All Orders
+            </a>
+        </div>
+
+        <div class="table-responsive mt-3">
+            <table class="table align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @forelse($recent_orders as $order)
+                        <tr>
+                            <td>{{ $order->user->username ?? '-' }}</td>
+                            <td>{{ $order->product->name ?? '-' }}</td>
+                            <td>{{ $order->quantity }}</td>
+                            <td>
+                                @if($order->status == 'pending')
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                @elseif($order->status == 'completed')
+                                    <span class="badge bg-success">Accepted</span>
+                                @else
+                                    <span class="badge bg-secondary">
+                                        {{ ucfirst($order->status) }}
+                                    </span>
+                                @endif
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">
+                                No recent orders.
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 
 </div>
 
-<div class="stat-card">
+<style>
+    .admin-dashboard {
+        max-width: 1500px;
+        margin: 0 auto;
+    }
 
-    <h4 class="mb-3">Recent Orders</h4>
+    .dash-card {
+        min-height: 145px;
+        padding: 28px;
+        border-radius: 26px;
+        background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+        border: 1px solid rgba(255,255,255,.12);
+        box-shadow: 0 20px 45px rgba(0,0,0,.35);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: .3s;
+    }
 
-    <div class="table-responsive">
+    .dash-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(255,77,0,.55);
+        box-shadow: 0 25px 60px rgba(255,77,0,.18);
+    }
 
-        <table class="table table-dark table-hover">
+    .revenue-card {
+        background: linear-gradient(135deg, rgba(255,77,0,.16), rgba(255,255,255,.03));
+    }
 
-            <thead>
-                <tr>
-                    <th>User</th>
-                    <th>Product</th>
-                    <th>Qty</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
+    .dash-card h2 {
+        color: white;
+        font-size: 34px;
+        font-weight: 800;
+        margin: 0;
+    }
 
-            <tbody>
+    .dash-card p {
+        color: rgba(255,255,255,.65);
+        margin: 10px 0 0;
+        font-weight: 600;
+    }
 
-            @forelse($recent_orders as $order)
+    .dash-icon {
+        width: 64px;
+        height: 64px;
+        border-radius: 22px;
+        background: rgba(255,77,0,.18);
+        color: #ffb347;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+    }
 
-                <tr>
-                    <td>{{ $order->user->username ?? '-' }}</td>
-                    <td>{{ $order->product->name ?? '-' }}</td>
-                    <td>{{ $order->quantity }}</td>
-                    <td>{{ ucfirst($order->status) }}</td>
-                </tr>
+    .orders-panel {
+        padding: 28px;
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
+        border: 1px solid rgba(255,255,255,.12);
+        box-shadow: 0 25px 60px rgba(0,0,0,.35);
+    }
 
-            @empty
+    .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
 
-                <tr>
-                    <td colspan="4" class="text-center">
-                        No orders found
-                    </td>
-                </tr>
+    .panel-header h3 {
+        color: white;
+        font-size: 30px;
+        font-weight: 800;
+        margin: 0;
+    }
 
-            @endforelse
+    .panel-header p {
+        color: rgba(255,255,255,.55);
+        margin: 6px 0 0;
+    }
 
-            </tbody>
+    .orders-panel th {
+        color: #ffb347 !important;
+        font-weight: 800;
+        padding: 18px 14px;
+    }
 
-        </table>
+    .orders-panel td {
+        padding: 18px 14px;
+        color: white;
+    }
 
-    </div>
+    .btn-hot {
+        background: linear-gradient(135deg, #ff4d00, #ffb347);
+        color: white;
+        text-decoration: none;
+        padding: 11px 22px;
+        border-radius: 14px;
+        font-weight: 800;
+    }
 
-</div>
+    .btn-hot:hover {
+        color: white;
+        box-shadow: 0 12px 30px rgba(255,77,0,.3);
+    }
+</style>
 
 @endsection

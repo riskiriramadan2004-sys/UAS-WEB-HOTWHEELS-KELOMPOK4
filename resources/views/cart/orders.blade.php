@@ -36,21 +36,30 @@
                     @forelse($orders as $order)
                         <tr>
                             <td>#{{ $order->id }}</td>
+
                             <td>{{ $order->product->name ?? '-' }}</td>
+
                             <td>{{ $order->quantity }}</td>
+
                             <td>
                                 Rp {{ number_format(($order->product->price ?? 0) * $order->quantity, 0, ',', '.') }}
                             </td>
+
                             <td>{{ $order->payment_method }}</td>
+
                             <td>
                                 @if($order->status == 'pending')
-                                    <span class="badge bg-warning text-dark">Pending</span>
-                                @elseif($order->status == 'paid')
-                                    <span class="badge bg-info text-dark">Paid</span>
-                                @elseif($order->status == 'shipped')
-                                    <span class="badge bg-primary">Shipped</span>
+                                    <span class="badge bg-warning text-dark">
+                                        Pending
+                                    </span>
+                                @elseif($order->status == 'completed')
+                                    <span class="badge bg-success">
+                                        Accepted By Admin
+                                    </span>
                                 @else
-                                    <span class="badge bg-success">Completed</span>
+                                    <span class="badge bg-secondary">
+                                        {{ ucfirst($order->status) }}
+                                    </span>
                                 @endif
                             </td>
                         </tr>

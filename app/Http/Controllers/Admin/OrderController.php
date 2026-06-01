@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -17,18 +16,14 @@ class OrderController extends Controller
         return view('admin.orders.index', compact('orders'));
     }
 
-    public function updateStatus(Request $request, Order $order)
+    public function updateStatus(Order $order)
     {
-        $request->validate([
-            'status' => 'required|in:pending,paid,shipped,completed',
-        ]);
-
         $order->update([
-            'status' => $request->status,
+            'status' => 'completed',
         ]);
 
         return redirect()
             ->route('admin.orders.index')
-            ->with('success', 'Order status updated successfully');
+            ->with('success', 'Order accepted successfully');
     }
 }

@@ -16,7 +16,7 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'username' => 'required|unique:users,username',
+            'username' => 'required|email|unique:users,username',
             'password' => 'required|min:3',
         ]);
 
@@ -27,7 +27,8 @@ class RegisterController extends Controller
             'created_at' => now(),
         ]);
 
-        return redirect('/login')
-            ->with('success', 'Registrasi berhasil, silakan login');
+        return redirect('/')
+            ->with('success', 'Registrasi berhasil, silakan login.')
+            ->with('open_login_modal', true);
     }
 }

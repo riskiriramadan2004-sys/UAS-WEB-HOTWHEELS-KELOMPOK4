@@ -11,19 +11,22 @@
 
     <style>
         * {
+            box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
 
         body {
+            margin: 0;
             background:
                 radial-gradient(circle at 80% 10%, rgba(255,77,0,.18), transparent 25%),
                 linear-gradient(135deg, #050505, #101010, #1d0800);
             color: white;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         .sidebar {
-            background: rgba(0,0,0,.75);
+            background: rgba(0,0,0,.78);
             backdrop-filter: blur(18px);
             min-height: 100vh;
             position: fixed;
@@ -79,17 +82,26 @@
             transform: translateX(4px);
         }
 
+        .sidebar form button {
+            color: rgba(255,255,255,.78);
+        }
+
+        .sidebar form button:hover {
+            background: linear-gradient(135deg, #ff4d00, #ffb347) !important;
+            color: white !important;
+        }
+
         .main-content {
             margin-left: 280px;
-            padding: 30px;
+            padding: 32px;
             min-height: 100vh;
         }
 
         .welcome-text {
             color: white;
-            font-size: 30px;
+            font-size: 32px;
             font-weight: 800;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .welcome-subtext {
@@ -108,52 +120,16 @@
             box-shadow: 0 20px 45px rgba(0,0,0,.28);
         }
 
-        .stat-card {
-            padding: 22px;
-        }
-
-        .stat-value {
-            font-size: 34px;
-            font-weight: 800;
-            color: white;
-        }
-
-        .stat-label {
-            color: rgba(255,255,255,.68);
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .stat-icon {
-            width: 52px;
-            height: 52px;
-            background: rgba(255,77,0,.16);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            color: #ffb347;
-        }
-
         .table-card {
             overflow: hidden;
+            padding: 22px;
         }
 
         .table-card .card-header {
             background: rgba(0,0,0,.34);
             padding: 18px 24px;
             border-bottom: 1px solid rgba(255,255,255,.08);
-        }
-
-        .table-card .card-header h5 {
-            margin: 0;
-            color: white;
-            font-weight: 700;
-        }
-
-        .table-card .card-body {
-            padding: 22px;
+            margin: -22px -22px 22px -22px;
         }
 
         .btn-primary-custom,
@@ -164,12 +140,14 @@
             padding: 10px 24px;
             font-weight: 700;
             color: white;
+            text-decoration: none;
         }
 
         .btn-primary-custom:hover,
         .btn-hot:hover {
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(255,77,0,.28);
         }
 
         table {
@@ -195,16 +173,14 @@
             border-radius: 14px;
         }
 
-        .form-control:focus,
-        .form-select:focus {
-            background: rgba(255,255,255,.1);
-            border-color: #ff4d00;
+        .form-select option {
+            background: #111;
             color: white;
-            box-shadow: none;
         }
 
-        .form-control::placeholder {
-            color: rgba(255,255,255,.45);
+        .badge {
+            border-radius: 999px;
+            padding: 7px 12px;
         }
 
         @media(max-width: 768px) {
@@ -216,10 +192,12 @@
 
             .main-content {
                 margin-left: 0;
+                padding: 22px;
             }
         }
     </style>
 </head>
+
 <body>
 
 <div class="sidebar">
@@ -231,30 +209,30 @@
     <nav class="nav flex-column">
         <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
            href="{{ route('admin.dashboard') }}">
-            <i class="fas fa-gauge-high"></i> Dashboard
+            <i class="fas fa-gauge-high"></i>
+            Dashboard
         </a>
 
         <a class="nav-link {{ request()->routeIs('admin.products.*') ? 'active' : '' }}"
            href="{{ route('admin.products.index') }}">
-            <i class="fas fa-car-side"></i> Products
+            <i class="fas fa-car-side"></i>
+            Products
         </a>
 
         <a class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}"
            href="{{ route('admin.orders.index') }}">
-            <i class="fas fa-cart-shopping"></i> Orders
-        </a>
-
-        <a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
-           href="{{ route('admin.users.index') }}">
-            <i class="fas fa-users"></i> Users
+            <i class="fas fa-cart-shopping"></i>
+            Orders
         </a>
 
         <hr style="margin: 16px; border-color: rgba(255,255,255,.12);">
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button class="nav-link border-0 bg-transparent w-100 text-start">
-                <i class="fas fa-right-from-bracket"></i> Logout
+
+            <button type="submit" class="nav-link border-0 bg-transparent w-100 text-start">
+                <i class="fas fa-right-from-bracket"></i>
+                Logout
             </button>
         </form>
     </nav>
