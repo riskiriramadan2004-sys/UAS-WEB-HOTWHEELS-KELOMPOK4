@@ -2,24 +2,24 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserDashboardController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
+
+Route::get('/', function () {
+    return redirect('/login');
+});
 
 Route::get('/register', [RegisterController::class, 'showRegister'])
     ->name('register');
 
 Route::post('/register', [RegisterController::class, 'register'])
     ->name('register.process');
-
-Route::get('/', function () {
-    return redirect('/login');
-});
 
 Route::get('/login', [LoginController::class, 'showLogin'])
     ->name('login');
@@ -33,31 +33,25 @@ Route::post('/logout', [LoginController::class, 'logout'])
 Route::middleware('check.login')->group(function () {
 
     Route::get('/dashboard', [UserDashboardController::class, 'index'])
-    ->name('dashboard');
+        ->name('dashboard');
 
     Route::get('/products', [ProductController::class, 'index'])
-    ->name('products.index');
-
-    Route::get('/admin/orders', [OrderController::class, 'index'])
-    ->name('admin.orders.index');
-
-    Route::get('/admin/users', [UserController::class, 'index'])
-    ->name('admin.users.index');
+        ->name('products.index');
 
     Route::get('/cart', [CartController::class, 'index'])
-    ->name('cart.index');
+        ->name('cart.index');
 
-Route::post('/cart/add/{product_id}', [CartController::class, 'store'])
-    ->name('cart.add');
+    Route::post('/cart/add/{product_id}', [CartController::class, 'store'])
+        ->name('cart.add');
 
-    Route::get('/checkout',
-    [CartController::class, 'checkout'])
-    ->name('checkout');
+    Route::get('/checkout', [CartController::class, 'checkout'])
+        ->name('checkout');
 
-Route::post('/checkout',
-    [CartController::class, 'processCheckout'])
-    ->name('checkout.process');
+    Route::post('/checkout', [CartController::class, 'processCheckout'])
+        ->name('checkout.process');
 
+    Route::get('/my-orders', [CartController::class, 'orderHistory'])
+        ->name('orders.history');
 });
 
 Route::middleware(['check.login', 'check.admin'])
@@ -65,18 +59,17 @@ Route::middleware(['check.login', 'check.admin'])
     ->name('admin.')
     ->group(function () {
 
-        // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('dashboard');
 
-        // Products
         Route::resource('products', AdminProductController::class);
 
-        // Orders
         Route::get('/orders', [OrderController::class, 'index'])
             ->name('orders.index');
 
         Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus'])
             ->name('orders.update-status');
 
+        Route::get('/users', [UserController::class, 'index'])
+            ->name('users.index');
     });
