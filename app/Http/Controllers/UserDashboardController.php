@@ -12,8 +12,9 @@ class UserDashboardController extends Controller
     {
         $search = $request->search;
 
-        $products = Product::when($search, function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+        $products = Product::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
             })
             ->orderBy('id', 'desc')
             ->get();

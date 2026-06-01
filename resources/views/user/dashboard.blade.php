@@ -18,10 +18,25 @@
                 type="text"
                 name="search"
                 value="{{ $search ?? '' }}"
-                placeholder="🔍 Search your favorite car..."
+                placeholder="Search Hot Wheels..."
                 class="search-input"
             >
+
+            <button type="submit" class="search-btn">
+                🔍 Search
+            </button>
         </form>
+
+        @if(!empty($search))
+            <div class="search-result-text mt-3">
+                Showing result for:
+                <span>"{{ $search }}"</span>
+
+                <a href="{{ route('dashboard') }}" class="clear-search">
+                    Clear
+                </a>
+            </div>
+        @endif
     </div>
 
     @if(session('success'))
@@ -63,7 +78,7 @@
                         </h3>
 
                         <p>
-                            📦 stock: {{ $product->stock }} pcs
+                            📦 Stock: {{ $product->stock }} pcs
                         </p>
 
                         @if($product->stock > 0)
@@ -71,12 +86,12 @@
                                 @csrf
 
                                 <button class="btn-buy">
-                                    🛒 buy now
+                                    🛒 Buy Now
                                 </button>
                             </form>
                         @else
                             <button class="btn-buy disabled" disabled>
-                                out of stock
+                                Out of Stock
                             </button>
                         @endif
                     </div>
@@ -84,8 +99,23 @@
                 </div>
             </div>
         @empty
-            <div class="col-12 text-center text-white-50">
-                Produk tidak ditemukan.
+            <div class="col-12">
+                <div class="empty-box">
+                    <h3>Produk tidak ditemukan</h3>
+
+                    @if(!empty($search))
+                        <p>
+                            Tidak ada produk dengan kata kunci
+                            <strong>"{{ $search }}"</strong>.
+                        </p>
+
+                        <a href="{{ route('dashboard') }}" class="back-btn">
+                            Tampilkan Semua Produk
+                        </a>
+                    @else
+                        <p>Belum ada produk tersedia.</p>
+                    @endif
+                </div>
             </div>
         @endforelse
     </div>
@@ -94,24 +124,58 @@
 
 <style>
     .search-wrapper {
-        max-width: 650px;
+        max-width: 760px;
         margin: auto;
+        display: flex;
+        gap: 12px;
     }
 
     .search-input {
-        width: 100%;
+        flex: 1;
         background: #1b1b1b;
         border: 1px solid rgba(255,255,255,.18);
         color: white;
         border-radius: 40px;
         padding: 18px 28px;
-        font-size: 20px;
+        font-size: 18px;
         outline: none;
     }
 
     .search-input:focus {
         border-color: #ff6b6b;
         box-shadow: 0 0 30px rgba(255,90,0,.25);
+    }
+
+    .search-btn {
+        border: none;
+        border-radius: 40px;
+        padding: 0 28px;
+        color: white;
+        font-weight: 800;
+        background: linear-gradient(135deg, #ff6b6b, #ff5a00);
+        transition: .25s;
+    }
+
+    .search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px rgba(255,90,0,.32);
+    }
+
+    .search-result-text {
+        color: rgba(255,255,255,.65);
+        font-size: 15px;
+    }
+
+    .search-result-text span {
+        color: #ff7a1a;
+        font-weight: 800;
+    }
+
+    .clear-search {
+        margin-left: 12px;
+        color: #ff6b6b;
+        text-decoration: none;
+        font-weight: 800;
     }
 
     .product-card {
@@ -203,6 +267,44 @@
 
     .btn-buy.disabled {
         background: #555;
+    }
+
+    .empty-box {
+        padding: 50px;
+        text-align: center;
+        border-radius: 28px;
+        background: linear-gradient(145deg, #111, #171717);
+        border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .empty-box h3 {
+        color: white;
+        font-weight: 800;
+    }
+
+    .empty-box p {
+        color: rgba(255,255,255,.6);
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 12px 28px;
+        border-radius: 40px;
+        text-decoration: none;
+        color: white;
+        font-weight: 800;
+        background: linear-gradient(135deg, #ff6b6b, #ff5a00);
+    }
+
+    @media(max-width: 768px) {
+        .search-wrapper {
+            flex-direction: column;
+        }
+
+        .search-btn {
+            padding: 15px;
+        }
     }
 </style>
 
