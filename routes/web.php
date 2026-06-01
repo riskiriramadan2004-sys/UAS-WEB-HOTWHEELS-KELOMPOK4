@@ -12,8 +12,8 @@ use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
-    return redirect('/login');
-});
+    return view('welcome');
+})->name('home');
 
 Route::get('/register', [RegisterController::class, 'showRegister'])
     ->name('register');
