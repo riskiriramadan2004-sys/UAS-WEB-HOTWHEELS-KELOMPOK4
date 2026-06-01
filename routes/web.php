@@ -7,13 +7,13 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\CartController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/register', [RegisterController::class, 'showRegister'])
     ->name('register');
 
@@ -34,7 +34,7 @@ Route::middleware('check.login')->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])
         ->name('dashboard');
 
-    Route::get('/products', [ProductController::class, 'index'])
+    Route::get('/products', [UserDashboardController::class, 'index'])
         ->name('products.index');
 
     Route::get('/cart', [CartController::class, 'index'])
