@@ -47,18 +47,6 @@
             pointer-events: none;
         }
 
-        .hero::after {
-            content: "";
-            position: absolute;
-            width: 520px;
-            height: 520px;
-            left: -180px;
-            bottom: -180px;
-            background: radial-gradient(circle, rgba(255, 107, 0, .3), transparent 65%);
-            filter: blur(20px);
-            z-index: 1;
-        }
-
         .navbar-custom {
             position: absolute;
             top: 0;
@@ -115,7 +103,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: none;
         }
 
         .hero-description {
@@ -127,9 +114,6 @@
         }
 
         .actions {
-            display: flex;
-            gap: 16px;
-            align-items: center;
             margin-top: 42px;
         }
 
@@ -153,17 +137,6 @@
             box-shadow:
                 0 22px 50px rgba(255, 90, 0, .48),
                 inset 0 1px 0 rgba(255,255,255,.3);
-        }
-
-        .btn-outline-hot {
-            padding: 18px 36px;
-            border-radius: 50px;
-            color: white;
-            border: 1px solid rgba(255,255,255,.22);
-            background: rgba(255,255,255,.04);
-            text-decoration: none;
-            font-weight: 800;
-            backdrop-filter: blur(8px);
         }
 
         .hero-right {
@@ -360,11 +333,6 @@
                 font-size: 18px;
             }
 
-            .actions {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
             .hero-right {
                 width: 100vw;
                 opacity: .45;
@@ -404,10 +372,6 @@
             <div class="actions">
                 <button class="btn-shop" data-bs-toggle="modal" data-bs-target="#authChoiceModal">
                     Shop Now →
-                </button>
-
-                <button class="btn-outline-hot" data-bs-toggle="modal" data-bs-target="#registerModal">
-                    Join Collector
                 </button>
             </div>
         </div>
@@ -450,7 +414,7 @@
                             data-bs-toggle="modal"
                             data-bs-target="#registerModal">
                         <h5 class="mb-1">Register</h5>
-                        <small class="text-white-50">Buat akun baru sebagai collector.</small>
+                        <small class="text-white-50">Buat akun baru.</small>
                     </button>
                 </div>
             </div>
