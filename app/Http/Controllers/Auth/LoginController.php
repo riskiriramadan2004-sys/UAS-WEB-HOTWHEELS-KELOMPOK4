@@ -10,15 +10,6 @@ class LoginController extends Controller
 {
     public function showLogin()
     {
-        if (session()->has('user')) {
-
-            if (session('user.role') === 'admin') {
-                return redirect('/admin/dashboard');
-            }
-
-            return redirect('/dashboard');
-        }
-
         return view('auth.login');
     }
 
@@ -33,12 +24,10 @@ class LoginController extends Controller
             ->where('username', $request->username)
             ->first();
 
-        if (!$user) {
-            return back()->with('error', 'Username tidak ditemukan');
-        }
-
-        if ($user->password !== md5($request->password)) {
-            return back()->with('error', 'Password salah');
+        if (!$user || $user->password !== md5($request->password)) {
+            return redirect()
+                ->back()
+                ->with('error', 'Username atau password salah');
         }
 
         session([
@@ -50,39 +39,17 @@ class LoginController extends Controller
         ]);
 
         if ($user->role === 'admin') {
-            return redirect('/admin/dashboard');
+            return redirect()->route('admin.dashboard');
         }
 
-        return redirect('/dashboard');
+        return redirect()->route('dashboard');
     }
 
     public function logout()
     {
         session()->forget('user');
+        session()->flush();
 
-        return redirect('/login');
+        return redirect('/');
     }
-
-    public function showRegister()
-{
-    return view('auth.register');
-}
-
-public function register(Request $request)
-{
-    $request->validate([
-        'username' => 'required|unique:users,username',
-        'password' => 'required|min:3',
-    ]);
-
-    DB::table('users')->insert([
-        'username' => $request->username,
-        'password' => md5($request->password),
-        'role' => 'user',
-        'created_at' => now(),
-    ]);
-
-    return redirect('/login')
-        ->with('success', 'Account created successfully');
-}
 }
