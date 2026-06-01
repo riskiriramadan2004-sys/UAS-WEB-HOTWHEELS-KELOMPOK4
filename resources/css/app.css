@@ -1,0 +1,99 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* =========================
+   USER & ADMIN DASHBOARD
+========================= */
+
+body{
+    background:#0a0a0a;
+    color:white;
+}
+
+.hero-banner{
+    height:320px;
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.55),
+        rgba(0,0,0,.55)
+    ),
+    url('https://images.unsplash.com/photo-1503376780353-7e6692767b70');
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    align-items:center;
+
+    padding:50px;
+
+    margin-bottom:30px;
+}
+
+.hero-content h1{
+    font-size:52px;
+    font-weight:700;
+    color:white;
+}
+
+.hero-content p{
+    font-size:18px;
+    color:white;
+    max-width:600px;
+}
+
+.stat-card{
+    background:#141414;
+
+    border:1px solid #2c2c2c;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    height:100%;
+
+    transition:.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-5px);
+
+    border-color:#ff5722;
+}
+
+.stat-value{
+    font-size:34px;
+    font-weight:bold;
+}
+
+.stat-label{
+    color:#bdbdbd;
+}
+
+.stat-icon{
+    font-size:30px;
+    color:#ff5722;
+}
+
+.welcome-text{
+    font-size:36px;
+    font-weight:bold;
+
+    margin-bottom:10px;
+}
+
+.welcome-subtext{
+    color:#cfcfcf;
+
+    margin-bottom:30px;
+}
