@@ -4,20 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Order;
+use Illuminate\Http\Request;
 
 class UserDashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $total_products = Product::count();
+        $search = $request->search;
 
-        $total_orders = Order::where(
-            'user_id',
-            session('user.id')
-        )->count();
+        $products = Product::when($search, function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $total_orders = Order::where('user_id', session('user.id'))->count();
 
         return view('user.dashboard', compact(
-            'total_products',
+            'products',
+            'search',
             'total_orders'
         ));
     }
