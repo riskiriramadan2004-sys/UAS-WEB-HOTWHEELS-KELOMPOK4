@@ -2,177 +2,237 @@
 
 @section('content')
 
-<!-- HERO BANNER -->
-<div class="hero-banner mb-4">
+<div class="container my-5">
 
-    <div class="hero-content">
+    <div class="dashboard-hero mb-5">
+        <div>
+            <div class="eyebrow">WELCOME COLLECTOR</div>
 
-        <h1>HOT WHEELS COLLECTION</h1>
-
-        <p>
-            Discover rare die-cast cars, premium collections,
-            and exclusive releases.
-        </p>
-
-        <a href="{{ route('products.index') }}" class="btn btn-danger btn-lg">
-            Explore Products
-        </a>
-
-    </div>
-
-</div>
-
-<!-- STATISTICS -->
-
-<div class="row g-4 mb-4">
-
-    <div class="col-md-4">
-
-        <div class="stat-card">
-
-            <div class="stat-icon mb-3">
-                <i class="fas fa-car"></i>
-            </div>
-
-            <div class="stat-value">
-                {{ $total_products }}
-            </div>
-
-            <div class="stat-label">
-                Available Products
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-4">
-
-        <div class="stat-card">
-
-            <div class="stat-icon mb-3">
-                <i class="fas fa-shopping-cart"></i>
-            </div>
-
-            <div class="stat-value">
-                {{ $total_orders }}
-            </div>
-
-            <div class="stat-label">
-                My Orders
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-4">
-
-        <div class="stat-card">
-
-            <div class="stat-icon mb-3">
-                <i class="fas fa-star"></i>
-            </div>
-
-            <div class="stat-value">
-                1968
-            </div>
-
-            <div class="stat-label">
-                Founded Year
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ABOUT -->
-
-<div class="stat-card mb-4">
-
-    <div class="row align-items-center">
-
-        <div class="col-md-4">
-
-            <img
-                src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c"
-                class="img-fluid rounded">
-
-        </div>
-
-        <div class="col-md-8">
-
-            <h2>About Hot Wheels</h2>
+            <h1>
+                Halo, {{ session('user.username') }}
+            </h1>
 
             <p>
-                Hot Wheels is a die-cast toy car brand introduced by Mattel in
-                1968. With thousands of unique models and limited-edition
-                releases, Hot Wheels has become one of the most collected toy
-                brands in the world.
+                Jelajahi koleksi Hot Wheels terbaik, pesan mobil favoritmu,
+                dan pantau riwayat pembelianmu di sini.
             </p>
 
+            <a href="{{ route('products.index') }}" class="btn-dashboard">
+                Explore Collection →
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+            <div class="dash-card">
+                <div class="dash-icon">🏎️</div>
+                <h3>{{ $total_products ?? 0 }}</h3>
+                <p>Available Products</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="dash-card">
+                <div class="dash-icon">📦</div>
+                <h3>{{ $total_orders ?? 0 }}</h3>
+                <p>My Orders</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="dash-card">
+                <div class="dash-icon">🔥</div>
+                <h3>Hot</h3>
+                <p>Collector Deals</p>
+            </div>
         </div>
 
     </div>
 
-</div>
+    <div class="feature-section">
+        <div class="row align-items-center g-4">
 
-<!-- COLLECTIONS -->
+            <div class="col-md-6">
+                <img
+                    src="{{ asset('uploads/Pages Awal.jpg') }}"
+                    class="feature-image"
+                    alt="Hot Wheels Collection"
+                >
+            </div>
 
-<div class="stat-card mb-4">
+            <div class="col-md-6">
+                <div class="eyebrow">HOTWHEELS STORE</div>
 
-    <h2 class="mb-3">
-        Featured Collections
-    </h2>
+                <h2>
+                    Build your dream cars collection.
+                </h2>
 
-    <div class="d-flex flex-wrap gap-2">
+                <p>
+                    Pilih produk Hot Wheels favoritmu, masukkan ke keranjang,
+                    checkout, lalu pantau status pesanan melalui halaman
+                    My Orders.
+                </p>
 
-        <span class="badge bg-danger p-3">
-            Premium Collection
-        </span>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="{{ route('products.index') }}" class="btn-dashboard">
+                        Shop Now
+                    </a>
 
-        <span class="badge bg-primary p-3">
-            Boulevard Series
-        </span>
+                    <a href="{{ route('orders.history') }}" class="btn-outline-dashboard">
+                        My Orders
+                    </a>
+                </div>
+            </div>
 
-        <span class="badge bg-success p-3">
-            Fast & Furious
-        </span>
-
-        <span class="badge bg-warning text-dark p-3">
-            Monster Trucks
-        </span>
-
-        <span class="badge bg-info text-dark p-3">
-            Red Line Club
-        </span>
-
-        <span class="badge bg-secondary p-3">
-            Treasure Hunt
-        </span>
-
+        </div>
     </div>
 
 </div>
 
-<!-- TIPS -->
+<style>
+    .dashboard-hero {
+        min-height: 380px;
+        border-radius: 36px;
+        padding: 60px;
+        display: flex;
+        align-items: center;
+        background:
+            linear-gradient(to right, rgba(0,0,0,.85), rgba(0,0,0,.35)),
+            url('{{ asset('uploads/Pages Awal.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        border: 1px solid rgba(255,107,26,.25);
+        box-shadow: 0 25px 70px rgba(0,0,0,.55);
+    }
 
-<div class="stat-card">
+    .eyebrow {
+        color: #ff7a1a;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
 
-    <h2 class="mb-3">
-        Collector Tips
-    </h2>
+    .dashboard-hero h1 {
+        font-family: 'Orbitron', sans-serif;
+        color: white;
+        font-size: 52px;
+        font-weight: 800;
+        text-transform: uppercase;
+        max-width: 680px;
+    }
 
-    <ul>
-        <li>Store cars away from direct sunlight.</li>
-        <li>Keep original packaging for higher value.</li>
-        <li>Follow limited-edition releases.</li>
-        <li>Join collector communities.</li>
-        <li>Maintain your collection inventory.</li>
-    </ul>
+    .dashboard-hero p {
+        color: rgba(255,255,255,.75);
+        font-size: 18px;
+        max-width: 620px;
+        margin: 20px 0 35px;
+    }
 
-</div>
+    .btn-dashboard {
+        display: inline-block;
+        padding: 14px 34px;
+        border-radius: 40px;
+        color: white;
+        text-decoration: none;
+        font-weight: 800;
+        border: none;
+        background: linear-gradient(135deg, #ff5a00, #ffa12b);
+        box-shadow: 0 14px 35px rgba(255,90,0,.35);
+    }
+
+    .btn-dashboard:hover {
+        color: white;
+        transform: translateY(-3px);
+    }
+
+    .btn-outline-dashboard {
+        display: inline-block;
+        padding: 14px 34px;
+        border-radius: 40px;
+        color: white;
+        text-decoration: none;
+        font-weight: 800;
+        border: 1px solid rgba(255,255,255,.2);
+        background: rgba(255,255,255,.06);
+    }
+
+    .dash-card {
+        height: 100%;
+        padding: 30px;
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+        border: 1px solid rgba(255,107,26,.22);
+        box-shadow: 0 20px 50px rgba(0,0,0,.35);
+        transition: .3s;
+    }
+
+    .dash-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(255,107,26,.65);
+        box-shadow: 0 25px 60px rgba(255,90,0,.18);
+    }
+
+    .dash-icon {
+        font-size: 36px;
+        margin-bottom: 18px;
+    }
+
+    .dash-card h3 {
+        color: white;
+        font-size: 42px;
+        font-weight: 800;
+        margin-bottom: 6px;
+    }
+
+    .dash-card p {
+        color: rgba(255,255,255,.65);
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .feature-section {
+        padding: 35px;
+        border-radius: 32px;
+        background: rgba(255,255,255,.05);
+        border: 1px solid rgba(255,107,26,.2);
+    }
+
+    .feature-image {
+        width: 100%;
+        height: 340px;
+        object-fit: cover;
+        border-radius: 26px;
+        box-shadow: 0 20px 50px rgba(0,0,0,.45);
+    }
+
+    .feature-section h2 {
+        font-family: 'Orbitron', sans-serif;
+        color: white;
+        font-size: 38px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    .feature-section p {
+        color: rgba(255,255,255,.68);
+        font-size: 17px;
+        line-height: 1.7;
+        margin: 20px 0 30px;
+    }
+
+    @media(max-width: 768px) {
+        .dashboard-hero {
+            padding: 35px;
+        }
+
+        .dashboard-hero h1 {
+            font-size: 36px;
+        }
+    }
+</style>
 
 @endsection

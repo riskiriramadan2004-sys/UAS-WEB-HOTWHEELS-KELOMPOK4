@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>User Dashboard</title>
-</head>
-<body>
+<?php
 
-    <h1>User Dashboard</h1>
+namespace App\Http\Controllers;
 
-    <a href="{{ route('products.index') }}">
-        Lihat Produk
-    </a>
+use App\Models\Product;
+use App\Models\Order;
 
-    <br><br>
+class UserDashboardController extends Controller
+{
+    public function index()
+    {
+        $total_products = Product::count();
 
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
+        $total_orders = Order::where(
+            'user_id',
+            session('user.id')
+        )->count();
 
-</body>
-</html>
+        return view('user.dashboard', compact(
+            'total_products',
+            'total_orders'
+        ));
+    }
+}
