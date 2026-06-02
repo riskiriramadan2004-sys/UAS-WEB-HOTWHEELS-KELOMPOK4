@@ -9,19 +9,22 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('users')->insert([
+        DB::table('users')->updateOrInsert(
+            ['username' => 'admin'],
             [
-                'username' => 'admin',
                 'password' => md5('admin123'),
                 'role' => 'admin',
                 'created_at' => now(),
-            ],
+            ]
+        );
+
+        DB::table('users')->updateOrInsert(
+            ['username' => 'user1'],
             [
-                'username' => 'user1',
                 'password' => md5('user123'),
                 'role' => 'user',
                 'created_at' => now(),
-            ],
-        ]);
+            ]
+        );
     }
 }
