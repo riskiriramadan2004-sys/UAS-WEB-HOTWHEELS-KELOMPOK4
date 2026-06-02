@@ -56,6 +56,12 @@
             text-decoration: none;
             color: #ff6b1a;
             text-shadow: 0 0 25px rgba(255,107,26,.35);
+            transition: .3s ease;
+        }
+
+        .logo:hover {
+            color: #ffa12b;
+            transform: scale(1.05);
         }
 
         .hero-left {
@@ -76,6 +82,7 @@
             letter-spacing: 4px;
             text-transform: uppercase;
             margin-bottom: 18px;
+            animation: fadeUp 1s ease;
         }
 
         .hero-title {
@@ -86,6 +93,7 @@
             color: #fff;
             margin: 0;
             text-transform: uppercase;
+            animation: fadeUp 1.2s ease;
         }
 
         .hero-title span {
@@ -94,6 +102,18 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            min-height: 85px;
+        }
+
+        #typingText::after {
+            content: "|";
+            color: #ffa12b;
+            animation: blink .8s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         .hero-description {
@@ -102,9 +122,22 @@
             max-width: 640px;
             margin-top: 28px;
             line-height: 1.6;
+            animation: fadeUp 1.5s ease;
+            transition: .3s ease;
         }
 
-        .actions { margin-top: 42px; }
+        .hero-description:hover {
+            color: white;
+            transform: translateX(8px);
+        }
+
+        .actions {
+            margin-top: 42px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            animation: fadeUp 1.8s ease;
+        }
 
         .btn-shop {
             padding: 18px 44px;
@@ -115,11 +148,41 @@
             background: linear-gradient(135deg, #ff5a00, #ffa12b);
             box-shadow: 0 14px 38px rgba(255,90,0,.35), inset 0 1px 0 rgba(255,255,255,.3);
             transition: .25s ease;
+            cursor: pointer;
         }
 
         .btn-shop:hover {
             transform: translateY(-4px);
             box-shadow: 0 22px 50px rgba(255,90,0,.48), inset 0 1px 0 rgba(255,255,255,.3);
+        }
+
+        .btn-explore {
+            padding: 18px 34px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 800;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,.35);
+            background: rgba(255,255,255,.06);
+            transition: .25s ease;
+        }
+
+        .btn-explore:hover {
+            color: #ffa12b;
+            border-color: #ffa12b;
+            transform: translateY(-4px);
+            background: rgba(255,107,26,.12);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-right {
@@ -180,8 +243,17 @@
             animation: speedMove 2.8s linear infinite;
         }
 
-        .speed-line:nth-child(2) { bottom: 16%; width: 180px; animation-delay: .8s; }
-        .speed-line:nth-child(3) { bottom: 20%; width: 320px; animation-delay: 1.4s; }
+        .speed-line:nth-child(2) {
+            bottom: 16%;
+            width: 180px;
+            animation-delay: .8s;
+        }
+
+        .speed-line:nth-child(3) {
+            bottom: 20%;
+            width: 320px;
+            animation-delay: 1.4s;
+        }
 
         @keyframes speedMove {
             0% { transform: translateX(-80px); opacity: 0; }
@@ -198,7 +270,9 @@
             box-shadow: 0 25px 70px rgba(0,0,0,.65);
         }
 
-        .modal-header { border-bottom: 1px solid rgba(255,255,255,.1); }
+        .modal-header {
+            border-bottom: 1px solid rgba(255,255,255,.1);
+        }
 
         .modal-title {
             font-family: 'Orbitron', sans-serif;
@@ -222,7 +296,9 @@
             color: white;
         }
 
-        .form-control::placeholder { color: rgba(255,255,255,.45); }
+        .form-control::placeholder {
+            color: rgba(255,255,255,.45);
+        }
 
         label {
             font-size: 13px;
@@ -264,24 +340,61 @@
         }
 
         @media(max-width: 992px) {
-            .navbar-custom { width: 100%; padding: 24px 20px; }
-            .logo { font-size: 28px; }
+            .navbar-custom {
+                width: 100%;
+                padding: 24px 20px;
+            }
+
+            .logo {
+                font-size: 28px;
+            }
+
             .hero-left {
                 width: 100%;
                 min-height: 100vh;
                 padding: 130px 30px 60px;
                 background: rgba(0,0,0,.52);
             }
-            .hero-title { font-size: 52px; }
-            .hero-description { font-size: 18px; }
-            .hero-right { width: 100vw; opacity: .45; }
+
+            .hero-title {
+                font-size: 52px;
+            }
+
+            .hero-title span {
+                min-height: 62px;
+            }
+
+            .hero-description {
+                font-size: 18px;
+            }
+
+            .hero-right {
+                width: 100vw;
+                opacity: .45;
+            }
+        }
+
+        @media(max-width: 576px) {
+            .hero-title {
+                font-size: 40px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn-shop,
+            .btn-explore {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<section class="hero">
+<section class="hero" id="home">
     <div class="speed-line"></div>
     <div class="speed-line"></div>
     <div class="speed-line"></div>
@@ -294,21 +407,26 @@
 
     <div class="hero-left">
         <div>
-            <div class="eyebrow">official die cast store</div>
+            <div class="eyebrow">Official Die Cast Store</div>
 
             <h1 class="hero-title">
-                collect your
-                <span>dream cars</span>
+                Discover The
+                <span id="typingText">Ultimate Collection</span>
             </h1>
 
             <p class="hero-description">
-                Temukan koleksi Hot Wheels terbaik dengan desain ikonik,
-                harga terbaik, dan pengalaman belanja yang cepat.
+                Jelajahi koleksi Hot Wheels premium, edisi langka,
+                dan mobil impian terbaik dengan pengalaman belanja yang cepat,
+                aman, dan menyenangkan.
             </p>
 
             <div class="actions">
                 <button class="btn-shop" data-bs-toggle="modal" data-bs-target="#authChoiceModal">
                     Shop Now →
+                </button>
+
+                <button class="btn-explore" type="button" onclick="showInfo()">
+                    Explore Collection
                 </button>
             </div>
         </div>
@@ -318,6 +436,28 @@
         <img src="{{ asset('uploads/Pages Awal.jpg') }}" class="hero-image" alt="Hot Wheels Collection">
     </div>
 </section>
+
+<div class="modal fade" id="infoModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+            <div class="modal-header">
+                <h5 class="modal-title">HOT WHEELS COLLECTION</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <p class="text-white-50 mb-3">
+                    Temukan berbagai koleksi Hot Wheels pilihan, mulai dari model klasik,
+                    mobil sport, edisi langka, hingga koleksi premium untuk para kolektor.
+                </p>
+
+                <button class="btn-auth" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#authChoiceModal">
+                    Mulai Belanja →
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="authChoiceModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -385,7 +525,7 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label>username / email</label>
+                        <label>Username / Email</label>
                         <input
                             type="text"
                             name="username"
@@ -396,7 +536,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label>password</label>
+                        <label>Password</label>
                         <input
                             type="password"
                             name="password"
@@ -406,7 +546,7 @@
                         >
                     </div>
 
-                    <button class="btn-auth">
+                    <button class="btn-auth" type="submit">
                         Login →
                     </button>
                 </form>
@@ -446,7 +586,7 @@
                     @csrf
 
                     <div class="mb-3">
-                        <label>email</label>
+                        <label>Email</label>
                         <input
                             type="email"
                             name="username"
@@ -457,7 +597,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label>password</label>
+                        <label>Password</label>
                         <input
                             type="password"
                             name="password"
@@ -468,7 +608,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label>confirm password</label>
+                        <label>Confirm Password</label>
                         <input
                             type="password"
                             name="password_confirmation"
@@ -478,7 +618,7 @@
                         >
                     </div>
 
-                    <button class="btn-auth">
+                    <button class="btn-auth" type="submit">
                         Register →
                     </button>
                 </form>
@@ -500,6 +640,57 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const words = [
+            'Ultimate Collection',
+            'Dream Cars',
+            'Rare Edition',
+            'Premium Models',
+            'Limited Series'
+        ];
+
+        let wordIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        const typingText = document.getElementById('typingText');
+
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+
+            if (deleting) {
+                typingText.textContent = currentWord.substring(0, charIndex--);
+            } else {
+                typingText.textContent = currentWord.substring(0, charIndex++);
+            }
+
+            if (!deleting && charIndex === currentWord.length + 1) {
+                deleting = true;
+                setTimeout(typeEffect, 1200);
+                return;
+            }
+
+            if (deleting && charIndex === 0) {
+                deleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+            }
+
+            setTimeout(typeEffect, deleting ? 60 : 120);
+        }
+
+        if (typingText) {
+            typeEffect();
+        }
+    });
+
+    function showInfo() {
+        const infoModalElement = document.getElementById('infoModal');
+        const infoModal = new bootstrap.Modal(infoModalElement);
+        infoModal.show();
+    }
+</script>
 
 @if(session('open_login_modal'))
 <script>
